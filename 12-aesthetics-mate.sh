@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-sudo dnf install -y cairo-dock
+sudo dnf install -y plank
 
 gsettings set org.mate.font-rendering antialiasing 'rgba'
 gsettings set org.mate.font-rendering hinting 'slight'
@@ -34,6 +34,6 @@ gsettings set org.mate.peripherals-touchpad disable-while-typing true
 gsettings set org.mate.peripherals-touchpad tap-to-click false
 
 gsettings set org.mate.session.required-components windowmanager 'compiz'
-gsettings set org.mate.session.required-components dock 'cairo-dock'
+gsettings set org.mate.session.required-components dock 'plank'
 
 gsettings set org.mate.Marco.general theme 'Arc-Dark'
