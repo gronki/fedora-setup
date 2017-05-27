@@ -1,11 +1,13 @@
 #!/bin/bash
 set -ex
 
-sudo dnf install -y libva{,-intel-driver}
+sudo dnf install -y libva{,-utils}
+sudo dnf install libva-intel-driver
+sudo dnf install libva-vdpau-driver vdpauinfo mesa-vdpau-drivers
 
 sudo dnf install -y gstreamer1-{libav,vaapi} gstreamer1-plugins{-base,-good{,-extras},-bad{-free{,-extras},-freeworld,-nonfree}}
 sudo dnf install -y gstreamer1-plugin-mpg123 mpg123-libs
-sudo dnf install -y gnome-mpv
+sudo dnf install -y mpv
 sudo dnf install -y gstreamer-{ffmpeg,plugins-good}
 
 sudo dnf config-manager --set-enabled fedora-cisco-openh264
