@@ -18,7 +18,8 @@ gsettings set org.mate.interface enable-animations true
 gsettings set org.mate.interface font-name "Cantarell 11"
 gsettings set org.mate.interface document-font-name "Noto Serif 11"
 gsettings set org.mate.interface monospace-font-name "Fira Mono 14"
-gsettings set org.mate.interface gtk-theme "Arc-Dark"
+gsettings set org.mate.interface gtk-theme "Arc-Darker"
+gsettings set org.mate.Marco.general theme 'Arc-Darker'
 gsettings set org.mate.interface icon-theme "Numix Circle"
 
 gsettings set org.mate.power-manager button-lid-ac 'nothing'
@@ -35,5 +36,3 @@ gsettings set org.mate.peripherals-touchpad tap-to-click false
 
 gsettings set org.mate.session.required-components windowmanager 'compiz'
 gsettings set org.mate.session.required-components dock 'plank'
-
-gsettings set org.mate.Marco.general theme 'Arc-Dark'
