@@ -35,6 +35,8 @@ gsettings set org.mate.peripherals-touchpad vertical-edge-scrolling false
 gsettings set org.mate.peripherals-touchpad disable-while-typing true
 gsettings set org.mate.peripherals-touchpad tap-to-click false
 
+gsettings set org.mate.panel object-id-list \[\'menu-bar\',\'notification-area\'\,\'clock\'\]
+
 gsettings set org.mate.peripherals-mouse cursor-size 24
 gsettings set org.mate.peripherals-mouse cursor-theme 'Adwaita'
 
