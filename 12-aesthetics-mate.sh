@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 sudo dnf install -y plank
+nohup plank &
 
 gsettings set org.mate.font-rendering antialiasing 'rgba'
 gsettings set org.mate.font-rendering hinting 'slight'
@@ -36,3 +37,4 @@ gsettings set org.mate.peripherals-touchpad tap-to-click false
 
 gsettings set org.mate.session.required-components windowmanager 'compiz'
 gsettings set org.mate.session.required-components dock 'plank'
+gsettings set net.launchpad.plank.dock.settings:/net/launchpad/plank/docks/dock1/ theme 'Arc'
