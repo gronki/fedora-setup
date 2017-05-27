@@ -27,3 +27,13 @@ sudo dnf install -y arc-theme numix-gtk-theme \
 # sudo dnf copr enable -y heikoada/gtk-themes
 # sudo dnf install -y adapta-gtk-theme-{gtk2,gtk3,chrome,gedit}
 # sudo dnf install gnome-shell-theme-adapta || echo OK
+
+sudo mkdir -p /usr/local/share/wallpapers
+
+sudo curl -L http://rigel.astronet.pl/~gronki/wallpapers/001.jpg -o /usr/local/share/wallpapers/001.jpg
+sudo curl -L http://rigel.astronet.pl/~gronki/wallpapers/002.jpg -o /usr/local/share/wallpapers/002.jpg
+sudo curl -L http://rigel.astronet.pl/~gronki/wallpapers/003.jpg -o /usr/local/share/wallpapers/003.jpg
+sudo curl -L http://rigel.astronet.pl/~gronki/wallpapers/004.jpg -o /usr/local/share/wallpapers/004.jpg
+sudo curl -L http://rigel.astronet.pl/~gronki/wallpapers/010.jpg -o /usr/local/share/wallpapers/010.jpg
+
+sudo chmod +r /usr/local/share/wallpapers/*.jpg
