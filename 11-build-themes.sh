@@ -32,4 +32,4 @@ sudo make install
 popd
 
 sudo dnf remove -y glib2-devel gdk-pixbuf2-devel librsvg2-devel
-sudo dnf remove parallel sassc
+sudo dnf remove -y parallel sassc
