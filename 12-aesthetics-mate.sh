@@ -21,6 +21,7 @@ gsettings set org.mate.interface monospace-font-name "Fira Mono 14"
 gsettings set org.mate.interface gtk-theme "Arc-Darker"
 gsettings set org.mate.Marco.general theme 'Arc-Darker'
 gsettings set org.mate.interface icon-theme "Numix-Circle"
+gsettings set org.mate.interface gtk-color-scheme 'menu_bg: #ffffff'
 
 gsettings set org.mate.power-manager button-lid-ac 'nothing'
 gsettings set org.mate.power-manager button-lid-battery 'suspend'
