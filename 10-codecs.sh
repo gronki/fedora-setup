@@ -1,13 +1,13 @@
 #!/bin/bash
 set -ex
 
-sudo dnf install -y libva{,-utils} vdpauinfo
+sudo dnf install -y libva{,-utils} vdpauinfo ffmpeg-libs
 
-sudo dnf install -y gstreamer1-{libav,vaapi} gstreamer1-plugins{-base,-good{,-extras},-bad{-free{,-extras},-freeworld,-nonfree}}
+sudo dnf install -y gstreamer1-vaapi gstreamer1-plugins{-base,-good{,-extras},-bad{-free{,-extras},-freeworld,-nonfree}}
 sudo dnf install -y gstreamer1-plugin-mpg123 mpg123-libs
 
 sudo dnf install -y mpv
-echo 'hwdec=auto' | sudo tee -a /etc/mpv/mpv.conf
+echo 'hwdec=yes' | sudo tee -a /etc/mpv/mpv.conf
 
 sudo dnf install -y gstreamer-{ffmpeg,plugins-good}
 
