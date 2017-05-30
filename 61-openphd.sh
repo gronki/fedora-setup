@@ -4,8 +4,6 @@ set -ex
 sudo dnf install -y @c-development cmake pkgconfig \
     {wxGTK3,libindi,libnova,zlib,libusb}{,-devel}
 
-{wxGTK3,libindi,libnova,zlib,libusb}{,-devel}
-
 export CFLAGS="-O3 -march=native -ffast-math"
 export FFLAGS="-O3 -march=native -ffast-math"
 export CXXFLAGS="-O3 -march=native -ffast-math"
