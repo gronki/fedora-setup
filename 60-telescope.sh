@@ -2,12 +2,14 @@
 set -ex
 
 # telescope control
-sudo dnf install -y indistarter libindi indi-eqmod indi-gphoto ccdciel
+sudo dnf install -y kstars libindi indi-eqmod indi-gphoto ccdciel
 #sudo dnf install -y nightview
 
 # TheImagingSource
 
-sudo curl https://raw.githubusercontent.com/TheImagingSource/tiscamera/master/data/udev/80-theimagingsource-cameras.rules -o /etc/udev/rules.d/80-theimagingsource.rules
+sudo curl -L \
+    https://raw.githubusercontent.com/TheImagingSource/tiscamera/master/data/udev/80-theimagingsource-cameras.rules \
+    -o /etc/udev/rules.d/80-theimagingsource.rules
 
 # ATIK
 

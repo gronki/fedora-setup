@@ -22,7 +22,7 @@ sudo dnf install -y ast
 
 # planetarium sofware
 sudo dnf install -y stellarium skychart{,-data-{stars,dso}} \
-        starplot{,-contrib,-gliese3,-yale5}
+        starplot{,-contrib,-gliese3,-yale5} kstars
 
 # FITS and other astro files
 sudo dnf install -y pyfits cfitsio{,-devel} ATpy

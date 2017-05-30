@@ -1,7 +1,14 @@
 #!/bin/bash
 set -ex
 
-sudo dnf install -y @c-development cmake pkgconfig wxGTK3{,-devel} libindi{,-devel,-static} libnova{,-devel} zlib{,-devel} libusb{,-devel}
+sudo dnf install -y @c-development cmake pkgconfig \
+    {wxGTK3,libindi,libnova,zlib,libusb}{,-devel}
+
+{wxGTK3,libindi,libnova,zlib,libusb}{,-devel}
+
+export CFLAGS="-O3 -march=native -ffast-math"
+export FFLAGS="-O3 -march=native -ffast-math"
+export CXXFLAGS="-O3 -march=native -ffast-math"
 
 OPENPHD_VER=2.6.3dev4
 pushd $(mktemp -d)
@@ -16,4 +23,4 @@ sudo make install
 
 popd
 
-sudo dnf remove wxGTK3-devel libindi-devel libindi-static libnova-devel zlib-devel libusb-devel
+sudo dnf remove wxGTK3-devel {libindi,libnova,zlib,libusb}-devel || echo nope
