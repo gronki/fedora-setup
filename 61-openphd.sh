@@ -2,7 +2,7 @@
 set -ex
 
 sudo dnf install -y @c-development cmake pkgconfig \
-    {wxGTK3,libindi,libnova,zlib,libusb}{,-devel}
+    {wxGTK3,libindi,libnova,zlib,libusb}{,-devel} libindi-static
 
 export CFLAGS="-O3 -march=native -ffast-math"
 export FFLAGS="-O3 -march=native -ffast-math"
@@ -21,4 +21,4 @@ sudo make install
 
 popd
 
-sudo dnf remove wxGTK3-devel {libindi,libnova,zlib,libusb}-devel || echo nope
+sudo dnf remove wxGTK3-devel {libindi,libnova,zlib,libusb}-devel libindi-static || echo nope
