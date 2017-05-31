@@ -21,6 +21,7 @@ sudo make install
 cat - | tee /tmp/astrometry-path.sh <<EOF
 export PATH="\$PATH:/opt/astrometry/bin"
 EOF
+
 sudo mv /tmp/astrometry-path.sh /etc/profile.d/
 
 sudo dnf remove swig {freetype,zlib,libpng,cairo,libjpeg-turbo,libimagequant}-devel \
