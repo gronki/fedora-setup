@@ -11,8 +11,13 @@ ASTROMETRY_VERSION=0.70
 curl -L https://github.com/dstndstn/astrometry.net/archive/${ASTROMETRY_VERSION}.tar.gz -o astrometry.net.tar.gz
 tar xzf astrometry.net.tar.gz
 cd astrometry.net-${ASTROMETRY_VERSION}
-./configure --prefix=/usr/local
+./configure --prefix=/opt
 make -j $(nproc) all
 sudo make install
+
+cat - | tee /tmp/astrometry-path.sh <<EOF
+export PATH="\$PATH:/opt/astrometry/bin"
+EOF
+sudo mv /tmp/astrometry-path.sh /etc/profile.d/
 
 sudo dnf remove swig {freetype,zlib,libpng,cairo,libjpeg-turbo,libimagequant}-devel || echo nope
