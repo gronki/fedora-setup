@@ -18,7 +18,7 @@ cd astrometry.net-${ASTROMETRY_VERSION}
 make -j $(nproc) all
 sudo make install
 
-cat - | tee /tmp/astrometry-path.sh <<EOF
+cat - > /tmp/astrometry-path.sh <<EOF
 export PATH="\$PATH:/opt/astrometry/bin"
 EOF
 
