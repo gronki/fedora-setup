@@ -1,13 +1,12 @@
 #!/bin/bash
 set -ex
 
-sudo dnf install -y dconf-editor yumex-dnf
 sudo -b updatedb
 sudo systemctl enable sshd
 
 echo 'export EDITOR=nano' | sudo tee -a /etc/profile.d/editor.sh
 
-CFLAGS="-g -Wall -O3 -march=native -mieee-fp"
+CFLAGS="$(rpm -E %optflags) -O3 -march=native -mieee-fp"
 FFLAGS_EXTRA="-Wstandard -Warray-temporaries -Wno-unused-dummy-argument \
 -Waliasing -Wampersand -Wdeprecated -Wtarget-lifetime -Wsurprising"
 
