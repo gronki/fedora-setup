@@ -7,10 +7,6 @@ sudo dnf install -y siril cpl sextractor
 # ephemerides
 sudo dnf install -y proas
 
-# lovely ds9
-sudo dnf copr enable -y gronki/saods9
-sudo dnf install -y saods9
-
 # astrometry
 sudo dnf install -y scamp libnova
 
