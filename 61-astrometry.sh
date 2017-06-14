@@ -3,9 +3,7 @@
 sudo dnf install -y {freetype,zlib,libpng,cairo,libjpeg-turbo,libimagequant}-devel \
     swig redhat-rpm-config netpbm-progs
 
-export CFLAGS="-O3 -march=native -ffast-math"
-export FFLAGS="-O3 -march=native -ffast-math"
-export CXXFLAGS="-O3 -march=native -ffast-math"
+. /etc/profile.d/cflags.sh
 
 cd $(mktemp -d)
 ASTROMETRY_VERSION=0.70

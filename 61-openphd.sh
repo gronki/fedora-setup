@@ -4,9 +4,7 @@ set -ex
 sudo dnf install -y @c-development cmake pkgconfig \
     {wxGTK3,libindi,libnova,zlib,libusb}{,-devel} libindi-static
 
-export CFLAGS="-O3 -march=native -ffast-math"
-export FFLAGS="-O3 -march=native -ffast-math"
-export CXXFLAGS="-O3 -march=native -ffast-math"
+. /etc/profile.d/cflags.sh
 
 OPENPHD_VER=2.6.3dev4
 pushd $(mktemp -d)

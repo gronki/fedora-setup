@@ -16,3 +16,5 @@ export FFLAGS=\"$CFLAGS $FFLAGS_EXTRA\"
 export FCFLAGS=\"$CFLAGS $FFLAGS_EXTRA\"
 export F95FLAGS=\"$CFLAGS $FFLAGS_EXTRA\"
 export CXXFLAGS=\"$CFLAGS\" " | sudo tee -a /etc/profile.d/cflags.sh
+
+. /etc/profile.d/cflags.sh

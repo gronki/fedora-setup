@@ -31,11 +31,7 @@ rm -rv tkblt
 tar xzvf ../tkblt.tar.gz && rm -fv ../tkblt.tar.gz
 mv tkblt-${tkblt_version} tkblt
 
-# flags
-export CFLAGS="-O3 -march=native -ffast-math"
-export FFLAGS="$CFLAGS"
-export FCFLAGS="$CFLAGS"
-export CXXFLAGS="$CFLAGS"
+. /etc/profile.d/cflags.sh
 
 unix/configure --prefix $prefix \
         --exec-prefix   $prefix \
@@ -54,11 +50,9 @@ sudo install -d ${docdir}/saods9
 sudo install bin/ds9 ${bindir}
 sudo cp -rv ds9/doc/* ${docdir}/saods9/
 
-cd .. 
+cd ..
 sudo install -m 644 saods9.png ${datadir}/icons/
 sudo install -m 644 saods9.desktop ${datadir}/applications/
 rm -rfv saods9
 
 sudo dnf remove {libX11,zlib,libxml2,libxslt,libXft,fontconfig}-devel
-
-
