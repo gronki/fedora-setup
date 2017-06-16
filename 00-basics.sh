@@ -6,14 +6,14 @@ sudo systemctl enable sshd
 
 echo 'export EDITOR=nano' | sudo tee -a /etc/profile.d/editor.sh
 
-CFLAGS="$(rpm -E %optflags) -O3 -march=native -mieee-fp"
-FFLAGS_EXTRA="-Wstandard -Warray-temporaries -Wno-unused-dummy-argument \
--Waliasing -Wampersand -Wdeprecated -Wtarget-lifetime -Wsurprising"
+CFLAGS="-g -Wall -O3 -mieee-fp -march=native"
+FFLAGS="$CFLAGS -Wpedantic -Wintrinsics-std -Warray-temporaries \
+-Wsurprising -Waliasing -Wno-unused-dummy-argument"
 
 echo "export CFLAGS=\"$CFLAGS\"
-export FFLAGS=\"$CFLAGS $FFLAGS_EXTRA\"
-export FCFLAGS=\"$CFLAGS $FFLAGS_EXTRA\"
-export F95FLAGS=\"$CFLAGS $FFLAGS_EXTRA\"
-export CXXFLAGS=\"$CFLAGS\" " | sudo tee -a /etc/profile.d/cflags.sh
+export FFLAGS=\"$FFLAGS\"
+export FCFLAGS=\"$FFLAGS\"
+export F95FLAGS=\"$FFLAGS\"
+export CXXFLAGS=\"$CFLAGS\"" | sudo tee -a /etc/profile.d/cflags.sh
 
 . /etc/profile.d/cflags.sh
