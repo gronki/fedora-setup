@@ -6,5 +6,3 @@ echo export CXXFLAGS=\"$(rpm -E %optflags)\" | sudo tee -a /etc/profile.d/cflags
 echo export FFLAGS=\"$(rpm -E %optflags)\" | sudo tee -a /etc/profile.d/cflags.sh
 echo export FCFLAGS=\"$(rpm -E %optflags)\" | sudo tee -a /etc/profile.d/cflags.sh
 echo export FCFLAGS=\"$(rpm -E %optflags)\" | sudo tee -a /etc/profile.d/cflags.sh
-
-sudo dnf install git @c-development

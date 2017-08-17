@@ -23,11 +23,6 @@ sudo dnf install -y google-roboto-fonts \
 sudo dnf install arc-theme numix-gtk-theme \
       numix-icon-theme{,-circle} greybird-gtk{2,3}-theme
 
-# hekoaida and Adapta themes
-# sudo dnf copr enable -y heikoada/gtk-themes
-# sudo dnf install -y adapta-gtk-theme-{gtk2,gtk3,chrome,gedit}
-# sudo dnf install gnome-shell-theme-adapta || echo OK
-
 sudo mkdir -p /usr/local/share/wallpapers
 
 sudo curl -L http://rigel.astronet.pl/~gronki/wallpapers/001.jpg -o /usr/local/share/wallpapers/001.jpg

@@ -4,4 +4,4 @@ set -ex
 sudo yum install \
 lightdm \
 openbox obconf tint2 \
-rxvt-unicode lilyterm
+rxvt-unicode lilyterm 
