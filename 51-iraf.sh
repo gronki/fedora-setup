@@ -23,8 +23,4 @@ sudo ln -s $IRAFBASE/vendor/x11iraf/bin.linux/xgterm /usr/local/bin/
 
 cd && mkiraf
 
-cat - > /tmp/run-iraf.sh <<EOF
-alias iraf='xgterm -bg \#1E2022 -fg \#d0d0d0 -cr \#e0e0e0 -title IRAF -fn 12x24 -e cl'
-EOF
-
-sudo mv /tmp/run-iraf.sh /etc/profile.d/
+echo alias iraf=\'xgterm -bg \#1E2022 -fg \#d0d0d0 -cr \#e0e0e0 -title IRAF -fn 12x24 -e cl\' | sudo tee -a /etc/profile.d/run-iraf.sh

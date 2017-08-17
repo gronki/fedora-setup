@@ -37,4 +37,3 @@ make
 sudo make install
 
 sudo dnf remove -y glib2-devel gdk-pixbuf2-devel librsvg2-devel parallel
-

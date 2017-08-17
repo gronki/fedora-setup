@@ -6,4 +6,5 @@ texlive-collection-{langpolish,langenglish,fontsrecommended,fontsextra,htmlxml,b
 texlive-{antt,datetime2-polish,glossaries-polish,mwcls} \
 texlive-ams{cls,tex,math,refs} \
 texlive-{mnras,astro,biblatex-phys} \
+texlive-epsf \
 texlive-{fira,droid,markdown,fontspec,mathspec,ctablestack,tex4ht}

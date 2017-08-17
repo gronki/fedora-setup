@@ -2,8 +2,8 @@
 set -ex
 
 # telescope control
-sudo dnf install -y kstars libindi indi-eqmod indi-gphoto ccdciel
-#sudo dnf install -y nightview
+sudo dnf install -y libindi indi-eqmod indi-gphoto
+sudo dnf install kstars ccdciel
 
 # TheImagingSource
 
@@ -17,5 +17,13 @@ sudo dnf install -y libnova
 cd /usr/lib64
 sudo ln -sf libnova-0.15.so.0 libnova-0.14.so.0
 
-curl http://download.cloudmakers.eu/atikccd-1.23-amd64.rpm -o /tmp/atik.rpm
-sudo rpm -ivh --nodeps --force /tmp/atik.rpm
+cd $(mktemp -d)
+if test $(arch) == armv7l
+then
+sudo dnf install -y alien
+wget http://download.cloudmakers.eu/atikccd-1.23-armhf.deb
+alien -r atikccd-1.23-armhf.deb
+else
+wget http://download.cloudmakers.eu/atikccd-1.23-amd64.rpm
+fi
+sudo rpm -ivh --nodeps --force *.rpm

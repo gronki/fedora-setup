@@ -20,7 +20,7 @@ sudo dnf install -y google-roboto-fonts \
     google-droid-{sans,sans-mono,serif}-fonts
 
 # some pretty themes
-sudo dnf install -y arc-theme numix-gtk-theme \
+sudo dnf install arc-theme numix-gtk-theme \
       numix-icon-theme{,-circle} greybird-gtk{2,3}-theme
 
 # hekoaida and Adapta themes
