@@ -3,7 +3,6 @@ set -ex
 
 # telescope control
 sudo dnf install -y libindi indi-eqmod indi-gphoto wget
-sudo dnf install kstars ccdciel || echo nope
 
 # TheImagingSource
 

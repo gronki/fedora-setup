@@ -2,7 +2,8 @@
 set -ex
 
 T=$(mktemp)
-rpm -E %optflags | tee $T
+# rpm -E %optflags | tee $T
+echo -g -Wall -O2 -march=native | tee $T
 vim $T
 CFLAGS=$(cat $T)
 
