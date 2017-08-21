@@ -2,8 +2,7 @@
 set -ex
 
 T=$(mktemp)
-# rpm -E %optflags | tee $T
-echo "-g -Wall -O2 -march=native" | tee $T
+rpm --undefine _hardened_build -E %optflags | tee $T
 vim $T
 CFLAGS=$(cat $T)
 
