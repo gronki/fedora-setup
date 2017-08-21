@@ -8,7 +8,7 @@ sudo rm -rfv $IRAFBASE
 sudo mkdir -p $IRAFBASE
 cd $IRAFBASE
 
-sudo curl -L ftp://iraf.noao.edu/iraf/v216/PCIX/iraf.lnux.x86_64.tar.gz -o irpk.tar.gz
+sudo curl -L ftp://iraf.noao.edu/iraf/v216/PCIX/iraf.lnux.$(arch | sed s/i.86/x86/).tar.gz -o irpk.tar.gz
 sudo tar xfz irpk.tar.gz
 sudo rm irpk.tar.gz
 
