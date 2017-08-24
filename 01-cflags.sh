@@ -2,7 +2,8 @@
 set -ex
 
 T=$(mktemp)
-rpm --undefine _hardened_build -E %optflags | tee $T
+#rpm --undefine _hardened_build -E %optflags | tee $T
+echo '-g -O2' | tee $T
 vim $T
 CFLAGS=$(cat $T)
 
