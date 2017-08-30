@@ -3,10 +3,8 @@ set -e
 
 sudo dnf install -y \
     {freetype,zlib,libpng,cairo,cfitsio,libjpeg-turbo,libimagequant}-devel \
-    swig redhat-rpm-config netpbm-progs @c-development cfitsio \
-    python2-{numpy,devel} netpbm-devel
-
-. /etc/profile.d/cflags.sh
+    swig redhat-rpm-config @c-development cfitsio \
+    python2-{numpy,devel} gcc-c++ netpbm-{progs,devel}
 
 cd $(mktemp -d)
 ASTROMETRY_VERSION=0.72

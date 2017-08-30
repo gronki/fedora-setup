@@ -4,8 +4,6 @@ set -ex
 sudo dnf install @c-development cmake pkgconfig gcc-c++ \
     {wxGTK3,libindi,libnova,zlib,libusb}{,-devel} libindi-static
 
-. /etc/profile.d/cflags.sh
-
 OPENPHD_VER=2.6.3dev5
 
 cd $(mktemp -d)

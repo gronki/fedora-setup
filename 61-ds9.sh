@@ -20,7 +20,7 @@ cp ds9/saods9.{png,desktop} $builddir
 cd $builddir
 
 curl -L http://ds9.si.edu/download/source/ds9.${version}.tar.gz -o saods9.tar.gz
-curl -L https://github.com/wjoye/tkblt/archive/v${tkblt_version}.tar.gz -o tkblt.tar.gz
+# curl -L https://github.com/wjoye/tkblt/archive/v${tkblt_version}.tar.gz -o tkblt.tar.gz
 
 tar xzfv saods9.tar.gz && rm -fv saods9.tar.gz
 cd SAOImageDS9 
