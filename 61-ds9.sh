@@ -2,8 +2,7 @@
 
 set -e
 
-version=7.5
-tkblt_version=3.2.3
+version=7.6b4
 
 prefix=/usr/local
 bindir=$prefix/bin
@@ -13,6 +12,7 @@ datadir=$prefix/share
 docdir=$datadir/doc
 
 sudo dnf install -y {libX11,zlib,libxml2,libxslt,libXft,fontconfig}-devel
+sudo dnf install -y --allowerasing compat-openssl10-devel
 sudo dnf install -y gcc-gfortran libX11 zlib libxml2 libxslt fontconfig libXft tcl
 
 builddir=$(mktemp -d)
@@ -25,11 +25,7 @@ curl -L https://github.com/wjoye/tkblt/archive/v${tkblt_version}.tar.gz -o tkblt
 notify-send "DS9 $version" "Pobieranie zakończone"
 
 tar xzfv saods9.tar.gz && rm -fv saods9.tar.gz
-cd saods9
-
-rm -rv tkblt
-tar xzvf ../tkblt.tar.gz && rm -fv ../tkblt.tar.gz
-mv tkblt-${tkblt_version} tkblt
+cd SAOImageDS9 
 
 . /etc/profile.d/cflags.sh
 
@@ -39,7 +35,7 @@ unix/configure --prefix $prefix \
         --libexecdir    $libexecdir \
         --docdir        $docdir/saods9 \
         --datadir       $datadir
-make -j $(nproc)
+make
 
 notify-send "DS9 $version" "Budowanie zakończone -- podaj hasło!"
 
@@ -55,4 +51,5 @@ sudo install -m 644 saods9.png ${datadir}/icons/
 sudo install -m 644 saods9.desktop ${datadir}/applications/
 rm -rfv saods9
 
-sudo dnf remove {libX11,zlib,libxml2,libxslt,libXft,fontconfig}-devel
+sudo dnf remove {libX11,zlib,openssl,libxml2,libxslt,libXft,fontconfig}-devel
+sudo dnf remove compat-openssl10-devel

@@ -6,7 +6,7 @@ sudo dnf install @c-development cmake pkgconfig \
 
 . /etc/profile.d/cflags.sh
 
-OPENPHD_VER=2.6.3dev4
+OPENPHD_VER=2.6.3dev5
 
 cd $(mktemp -d)
 curl -L https://github.com/OpenPHDGuiding/phd2/archive/v${OPENPHD_VER}.zip -o phd2.zip
