@@ -2,7 +2,7 @@
 
 set -ex
 
-prefix=/usr
+prefix=/usr/local
 
 # dependencies for POP & Numix Frost Theme
 sudo dnf install -y glib2-devel gdk-pixbuf2-devel rubygem-sass
