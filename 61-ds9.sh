@@ -13,7 +13,7 @@ docdir=$datadir/doc
 
 sudo dnf install -y {libX11,zlib,libxml2,libxslt,libXft,fontconfig}-devel
 sudo dnf install -y --allowerasing compat-openssl10-devel
-sudo dnf install -y gcc-gfortran libX11 zlib libxml2 libxslt fontconfig libXft tcl
+sudo dnf install -y gcc-{c++,gfortran} libX11 zlib libxml2 libxslt fontconfig libXft tcl
 
 builddir=$(mktemp -d)
 cp ds9/saods9.{png,desktop} $builddir
@@ -22,12 +22,8 @@ cd $builddir
 curl -L http://ds9.si.edu/download/source/ds9.${version}.tar.gz -o saods9.tar.gz
 curl -L https://github.com/wjoye/tkblt/archive/v${tkblt_version}.tar.gz -o tkblt.tar.gz
 
-notify-send "DS9 $version" "Pobieranie zakończone"
-
 tar xzfv saods9.tar.gz && rm -fv saods9.tar.gz
 cd SAOImageDS9 
-
-. /etc/profile.d/cflags.sh
 
 unix/configure --prefix $prefix \
         --exec-prefix   $prefix \
@@ -35,9 +31,7 @@ unix/configure --prefix $prefix \
         --libexecdir    $libexecdir \
         --docdir        $docdir/saods9 \
         --datadir       $datadir
-make
-
-notify-send "DS9 $version" "Budowanie zakończone -- podaj hasło!"
+make 
 
 sudo install -d ${bindir}
 sudo install -d ${datadir}/{icons,applications}

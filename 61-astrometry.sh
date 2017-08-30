@@ -15,7 +15,7 @@ curl -L \
     -o astrometry.net.tar.gz
 tar xzf astrometry.net.tar.gz
 cd astrometry.net-${ASTROMETRY_VERSION}
-./configure && make -j $(nproc)
+./configure && make 
 sudo make install INSTALL_DIR=/opt/astrometry
 
 echo export PATH=\"\$PATH:/opt/astrometry/bin\" | sudo tee /etc/profile.d/astrometry-path.sh
