@@ -22,8 +22,6 @@ cd $builddir
 curl -L http://ds9.si.edu/download/source/ds9.${version}.tar.gz -o saods9.tar.gz
 curl -L https://github.com/wjoye/tkblt/archive/v${tkblt_version}.tar.gz -o tkblt.tar.gz
 
-notify-send "DS9 $version" "Pobieranie zakończone"
-
 tar xzfv saods9.tar.gz && rm -fv saods9.tar.gz
 cd saods9
 
@@ -39,9 +37,7 @@ unix/configure --prefix $prefix \
         --libexecdir    $libexecdir \
         --docdir        $docdir/saods9 \
         --datadir       $datadir
-make -j $(nproc)
-
-notify-send "DS9 $version" "Budowanie zakończone -- podaj hasło!"
+make 
 
 sudo install -d ${bindir}
 sudo install -d ${datadir}/{icons,applications}
