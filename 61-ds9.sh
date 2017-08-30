@@ -13,7 +13,7 @@ datadir=$prefix/share
 docdir=$datadir/doc
 
 sudo dnf install -y {libX11,zlib,libxml2,libxslt,libXft,fontconfig}-devel
-sudo dnf install -y gcc-gfortran libX11 zlib libxml2 libxslt fontconfig libXft tcl
+sudo dnf install -y gcc-{c++,gfortran} libX11 zlib libxml2 libxslt fontconfig libXft tcl
 
 builddir=$(mktemp -d)
 cp ds9/saods9.{png,desktop} $builddir

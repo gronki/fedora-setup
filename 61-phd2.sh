@@ -1,7 +1,7 @@
 #!/bin/bash
 set -ex
 
-sudo dnf install @c-development cmake pkgconfig \
+sudo dnf install @c-development cmake pkgconfig gcc-c++ \
     {wxGTK3,libindi,libnova,zlib,libusb}{,-devel} libindi-static
 
 . /etc/profile.d/cflags.sh
