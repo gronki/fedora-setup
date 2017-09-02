@@ -1,10 +1,9 @@
 #!/usr/bin/env bash
 
-sudo dnf install \
-texstudio bibutils \
-texlive-collection-{langpolish,langenglish,fontsrecommended,fontsextra,htmlxml,science} \
+sudo dnf install bibutils \
+texlive-collection-{langpolish,langenglish,science} \
 texlive-{antt,datetime2-polish,glossaries-polish,mwcls} \
 texlive-ams{cls,tex,math,refs} \
 texlive-{mnras,astro,biblatex-phys} \
-texlive-epsf \
-texlive-{fira,droid,markdown,fontspec,mathspec,ctablestack,tex4ht}
+texlive-{epsf,ctablestack,tex4ht}
+sudo dnf install texstudio
