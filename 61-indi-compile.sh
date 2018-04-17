@@ -15,7 +15,7 @@ mkdir build && cd build
 
 mkdir libindi && cd libindi
 cmake -DCMAKE_INSTALL_PREFIX=/opt/indi ../../libindi
-make
+make -j4
 sudo make install
 cd ..
 
