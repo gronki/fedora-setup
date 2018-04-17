@@ -2,8 +2,8 @@
 # coding: utf-8
 set -ex
 
-sudo dnf install @development-tools cmake
-sudo dnf install libnova-devel cfitsio-devel libusb-devel zlib-devel gsl-devel libjpeg-devel libcurl-devel
+#sudo dnf install @development-tools cmake
+#sudo dnf install libnova-devel cfitsio-devel libusb-devel zlib-devel gsl-devel libjpeg-devel libcurl-devel
 
 cd $(mktemp -d) && pwd
 
@@ -19,6 +19,8 @@ make -j4
 sudo make install
 cd ..
 
+pwd
+
 sudo tee /etc/profile.d/indi.sh <<EOF
 export LD_LIBRARY_PATH="/opt/indi/lib64:\$LD_LIBRARY_PATH"
 export PATH="/opt/indi/bin:\$PATH"
@@ -30,13 +32,16 @@ export CPATH=/opt/indi/include/libindi
 
 mkdir indi-eqmod && cd indi-eqmod
 cmake -DCMAKE_INSTALL_PREFIX=/opt/indi ../../3rdparty/indi-eqmod
-make
+make -j4
 sudo make install
 cd ..
+
+pwd
 
 mkdir indi-asi && cd indi-asi
 cmake -DCMAKE_INSTALL_PREFIX=/opt/indi ../../3rdparty/indi-asi
-make
+make -j4
 sudo make install
 cd ..
 
+pwd

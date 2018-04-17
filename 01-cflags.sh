@@ -1,22 +1,18 @@
 #!/bin/bash
 set -ex
 
-sudo dnf install @c-development gcc-{c++,gfortran} redhat-rpm-config
-
-cat | sudo tee /etc/profile.d/cflags.sh <<EOF
-OPTFLAGS="-O2 -ftree-vectorize -march=native"
-
-# rpm flags
-# OPTFLAGS="$(rpm --define '__global_compiler_flags -O2' -E %optflags)"
-
-# rpm flags -- full (without hardening)
-# OPTFLAGS="$(rpm --undefine _hardened_build -E %optflags)"
+sudo tee /etc/profile.d/cflags.sh <<EOF
+ARCH_FLAGS="-march=native"
+OPTFLAGS="-O2 -ftree-vectorize \$ARCH_FLAGS"
 
 # for rpi3
-# OPTFLAGS="-O2 -ftree-vectorize -pipe -mcpu=cortex-a53 -mfpu=neon-fp-armv8 -mfloat-abi=hard"
+# ARCH_FLAGS="-mcpu=cortex-a53 -mfpu=neon-fp-armv8 -mfloat-abi=hard"
+# OPTFLAGS="-O2 -ftree-vectorize -pipe \$ARCH_FLAGS"
 
 export CFLAGS="\$OPTFLAGS"
-export CXXLAGS="\$OPTFLAGS"
+export CXXFLAGS="\$OPTFLAGS"
 export FFLAGS="\$OPTFLAGS"
+export ARCH_FLAGS
 EOF
 
+sudo vim /etc/profile.d/cflags.sh
