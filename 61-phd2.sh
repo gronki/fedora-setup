@@ -2,9 +2,9 @@
 set -ex
 
 sudo dnf install @c-development cmake pkgconfig gcc-c++ \
-    {wxGTK3,libindi,libnova,zlib,libusb}{,-devel} libindi-static
+    {wxGTK3,libnova,zlib,libusb}{,-devel}
 
-OPENPHD_VER=2.6.3dev5
+OPENPHD_VER=2.6.4
 
 cd $(mktemp -d)
 curl -L https://github.com/OpenPHDGuiding/phd2/archive/v${OPENPHD_VER}.tar.gz -o phd2.tar.gz
@@ -15,7 +15,9 @@ mkdir -p tmp
 cd tmp
 
 cmake -DCMAKE_INSTALL_PREFIX=/usr/local ..
+# do not add -j4 here -- may cause compilation conflicts
 make
+read -p 'press ENTER to install PHD2'
 sudo make install
 
-sudo dnf remove wxGTK3-devel {libindi,libnova,zlib,libusb}-devel libindi-static || echo nope
+sudo dnf remove {wxGTK3,libnova,zlib,libusb}-devel || echo nope

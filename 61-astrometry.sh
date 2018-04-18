@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 set -e
 
+prefix=/usr/local
+
 sudo dnf install -y \
     {freetype,zlib,libpng,cairo,cfitsio,libjpeg-turbo,libimagequant}-devel \
     swig redhat-rpm-config @c-development cfitsio \
@@ -17,13 +19,24 @@ cd astrometry.net-${ASTROMETRY_VERSION}
 pwd
 
 ./configure && make -j4 
-sudo make install INSTALL_DIR=/opt/astrometry
+read -p 'press ENTER to install astrometry'
+sudo make install INSTALL_DIR=${prefix}
 
 pwd
 
-echo export PATH=\"\$PATH:/opt/astrometry/bin\" | sudo tee /etc/profile.d/astrometry-path.sh
+if [ $prefix != '/usr/local' ]; then
+	sudo tee /etc/profile.d/astrometry.sh <<EOF
+	export PATH=\"${prefix}/bin:\$PATH\"
+	export LIBRARY_PATH=\"${prefix}/lib:\$LIBRARY_PATH\"
+	# export LD_LIBRARY_PATH=\"${prefix}/lib:\$LD_LIBRARY_PATH\"
+EOF
 
-mkdir -p /opt/astrometry/data && cd /opt/astrometry/data
+	echo ${prefix}/lib | sudo tee /etc/ld.so.conf.d/astrometry.conf
+	sudo ldconfig -v
+fi
+
+read -p 'Press ENTER to download data...'
+sudo mkdir -p ${prefix}/data && cd ${prefix}/data
 
 # sudo wget --continue http://broiler.astrometry.net/~dstn/4200/index-{4219,4218,4217,4216,4215,4214,4213,4212,4211,4210,4209,4208,{4207,4206,4205}-{00,01,02,03,04,05,06,07,08,07,10,11}}.fits
 sudo wget --continue http://broiler.astrometry.net/~dstn/4200/index-{4211,4210,4209,4208}.fits
