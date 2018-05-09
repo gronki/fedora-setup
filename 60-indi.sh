@@ -4,7 +4,7 @@ set -ex
 
 prefix=/usr/local
 
-sudo dnf install @c-development cmake libnova-devel cfitsio-devel libusb-devel zlib-devel gsl-devel libjpeg-devel libcurl-devel libtheora-devel
+sudo dnf install -y @c-development cmake {libnova,cfitsio,libusb,zlib,gsl,libjpeg,libcurl,libtheora}{,-devel}
 
 cd $(mktemp -d) && pwd
 
@@ -61,3 +61,5 @@ sudo make install
 cd ..
 
 pwd
+
+sudo dnf remove {libnova,cfitsio,libusb,zlib,gsl,libjpeg,libcurl,libtheora}-devel || echo nope
