@@ -5,7 +5,7 @@ prefix=/usr/local
 
 sudo dnf install -y \
     {freetype,zlib,libpng,cairo,cfitsio,libjpeg-turbo,libimagequant}-devel \
-    swig redhat-rpm-config @c-development cfitsio \
+    swig redhat-rpm-config @c-development cfitsio sextractor \
     python2-{numpy,devel} gcc-c++ netpbm-{progs,devel}
 
 cd $(mktemp -d)
