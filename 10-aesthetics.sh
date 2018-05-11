@@ -23,12 +23,3 @@ sudo dnf install -y google-roboto-fonts \
 sudo dnf install arc-theme numix-gtk-theme \
       numix-icon-theme{,-circle} greybird-gtk{2,3}-theme
 
-sudo mkdir -p /usr/local/share/wallpapers
-
-sudo curl -L http://rigel.astronet.pl/~gronki/wallpapers/001.jpg -o /usr/local/share/wallpapers/001.jpg
-sudo curl -L http://rigel.astronet.pl/~gronki/wallpapers/002.jpg -o /usr/local/share/wallpapers/002.jpg
-sudo curl -L http://rigel.astronet.pl/~gronki/wallpapers/003.jpg -o /usr/local/share/wallpapers/003.jpg
-sudo curl -L http://rigel.astronet.pl/~gronki/wallpapers/004.jpg -o /usr/local/share/wallpapers/004.jpg
-sudo curl -L http://rigel.astronet.pl/~gronki/wallpapers/010.jpg -o /usr/local/share/wallpapers/010.jpg
-
-sudo chmod +r /usr/local/share/wallpapers/*.jpg
