@@ -1,9 +1,6 @@
 #!/bin/bash
 set -ex
 
-# telescope control
-sudo dnf install -y libindi indi-eqmod indi-gphoto wget
-
 # TheImagingSource
 
 sudo curl -L \
