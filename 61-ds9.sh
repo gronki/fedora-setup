@@ -2,7 +2,7 @@
 
 set -e
 
-version=7.6b4
+version=7.6
 
 prefix=/usr/local
 bindir=$prefix/bin
@@ -13,7 +13,7 @@ docdir=$datadir/doc
 
 sudo dnf install -y {libX11,zlib,libxml2,libxslt,libXft,fontconfig}-devel
 sudo dnf install -y --allowerasing compat-openssl10-devel
-sudo dnf install -y gcc-{c++,gfortran} libX11 zlib libxml2 libxslt fontconfig libXft tcl
+sudo dnf install -y @c-development gcc-{c++,gfortran} libX11 zlib libxml2 libxslt fontconfig libXft tcl
 
 builddir=$(mktemp -d)
 cp ds9/saods9.{png,desktop} $builddir
@@ -33,6 +33,7 @@ unix/configure --prefix $prefix \
         --datadir       $datadir
 make 
 
+read -p 'press ENTER to install SAODS9'
 sudo install -d ${bindir}
 sudo install -d ${datadir}/{icons,applications}
 sudo install -d ${docdir}/saods9
