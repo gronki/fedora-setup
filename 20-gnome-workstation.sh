@@ -4,7 +4,7 @@ set -ex
 sudo dnf copr enable -y region51/chrome-gnome-shell
 sudo dnf install -y chrome-gnome-shell
 
-sudo dnf install owncloud-client{,-nautilus} nautilus-extensions dconf-editor yumex-dnf tilix{,-nautilus} geary gnome-tweak-tool 
+sudo dnf install owncloud-client{,-nautilus} nautilus-extensions dconf-editor tilix{,-nautilus} geary gnome-tweak-tool 
 
 sudo dnf install gnome-shell-extension-{pomodoro,freon,apps-menu,places-menu,openweather,dash-to-dock,refresh-wifi,alternate-tab,topicons-plus,suspend-button,media-player-indicator}
 
