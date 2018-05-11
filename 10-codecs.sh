@@ -2,7 +2,7 @@
 set -ex
 
 sudo dnf install mpv \
-libva{,-utils} vdpauinfo ffmpeg-libs \
+libva{,-utils} vdpauinfo ffmpeg-libs compat-ffmpeg28 \
 gstreamer1-vaapi gstreamer1-plugins{-base,-good{,-extras},-bad{-free{,-extras},-freeworld,-nonfree}} \
 gstreamer1-plugin-mpg123 mpg123-libs \
 gstreamer-{ffmpeg,plugins-good} \
