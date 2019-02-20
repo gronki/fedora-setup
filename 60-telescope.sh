@@ -1,5 +1,7 @@
-#!/bin/bash
-set -ex
+#!/usr/bin/env bash
+set -e
+
+sudo dnf install -y bzip2-libs libnova astrometry kstars
 
 # TheImagingSource
 
@@ -9,21 +11,28 @@ sudo curl -L \
 
 # ATIK
 
-sudo dnf install -y libnova
-sudo ln -sf $(rpm -E %_libdir)/libnova-0.15.so.0 \
-	$(rpm -E %_libdir)/libnova-0.14.so.0
+sudo ln -sfv $(rpm -E %_libdir)/libnova-0.15.so.0 \
+	$(rpm -E %_libdir)/libnova-0.16.so.0
+sudo ln -sfv $(rpm -E %_libdir)/libbz2.so.1.0.* \
+	$(rpm -E %_libdir)/libbz2.so.1.0
 
-cd $(mktemp -d)
-if test $(arch) == armv7l
+atikccd_ver=1.30
+
+pushd $(mktemp -d)
+
+if [[ $(arch) == x86_64 ]]
 then
-	sudo dnf install -y alien
-	wget http://download.cloudmakers.eu/atikccd-1.23-armhf.deb
-	sudo alien -t atikccd-1.23-armhf.deb
-	tar xzf atikccd-1.23.tgz
-	cd usr
-	sudo cp -r * /usr/local/
-	sudo dnf remove alien
+	curl -L http://download.cloudmakers.eu/atikccd-${atikccd_ver}-amd64.rpm -o atik64.rpm
+	sudo rpm -ivh ./atik64.rpm --nodeps --force
+elif [[ $(arch) == arm* ]]
+then
+	curl -L http://download.cloudmakers.eu/atikccd-${atikccd_ver}-armhf.deb -o atikarm.deb
+	ar -x atikarm.deb
+	tar xaf data.tar.??
+	sudo cp -rv usr/local/* /usr/local/
+	sudo cp -v lib/udev/rules.d/99-atik.rules /usr/lib/udev/rules.d/
 else
-	wget http://download.cloudmakers.eu/atikccd-1.23-amd64.rpm
-	sudo rpm -ivh --nodeps --force *.rpm
+	echo "nieznana architektura"; exit -1
 fi
+
+popd

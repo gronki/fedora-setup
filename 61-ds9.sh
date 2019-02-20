@@ -2,7 +2,7 @@
 
 set -e
 
-version=7.6
+version=8.0.1
 
 prefix=/usr/local
 bindir=$prefix/bin
@@ -11,9 +11,9 @@ libexecdir=$prefix/libexec
 datadir=$prefix/share
 docdir=$datadir/doc
 
-sudo dnf install -y {libX11,zlib,libxml2,libxslt,libXft,fontconfig}-devel
+sudo dnf install -y {libX11,zlib,libxml2,libxslt,libXft,fontconfig}-devel \
+	@c-development gcc-{c++,gfortran} libX11 zlib libxml2 libxslt fontconfig libXft tcl
 sudo dnf install -y --allowerasing compat-openssl10-devel
-sudo dnf install -y @c-development gcc-{c++,gfortran} libX11 zlib libxml2 libxslt fontconfig libXft tcl
 
 builddir=$(mktemp -d)
 cp ds9/saods9.{png,desktop} $builddir

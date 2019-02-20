@@ -1,41 +1,36 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # coding: utf-8
-set -ex
+set -e
 
 prefix=/usr/local
 
 sudo dnf install -y @c-development cmake {libnova,cfitsio,libusb,zlib,gsl,libjpeg,libcurl,libtheora}{,-devel}
 
-cd $(mktemp -d) && pwd
+pushd $(mktemp -d) && pwd
 
-curl -L https://github.com/indilib/indi/archive/master.zip -o indi.zip
-unzip indi.zip 
-cd indi-master
+indiversion=1.7.5
+curl -L https://github.com/indilib/indi/archive/v${indiversion}.tar.gz -o indi.tar.gz
+tar xzf indi.tar.gz && cd indi-${indiversion}
 
 mkdir build && cd build
 
 mkdir libindi && cd libindi
 cmake -DCMAKE_INSTALL_PREFIX=$prefix ../../libindi
-make -j4
+make
 read -p 'press ENTER to install libindi'
 sudo make install
 cd ..
 
 pwd
 
-
 if [ $prefix != '/usr/local' ]; then
 	
-	if [ $(arch) == x86_64 ]; then
-		libdir="$prefix/lib64"
-	else
-		libdir="$prefix/lib"
-	fi
+	libdir=$(rpm --define "_prefix $prefix" -E %_libdir)
 
 	sudo tee /etc/profile.d/indi.sh <<EOF
 	export PATH="$prefix/bin:\$PATH"
 	export LIBRARY_PATH="$libdir:\$LIBRARY_PATH"
-	# export LD_LIBRARY_PATH="$libdir:\$LD_LIBRARY_PATH"
+	export LD_LIBRARY_PATH="$libdir:\$LD_LIBRARY_PATH"
 	export CPATH="$prefix/include/libindi:\$CPATH"
 EOF
 
@@ -44,22 +39,22 @@ EOF
 	sudo ldconfig -v
 fi
 
-mkdir indi-eqmod && cd indi-eqmod
-cmake -DCMAKE_INSTALL_PREFIX=$prefix ../../3rdparty/indi-eqmod
-make -j4
-read -p 'press ENTER to install indi-eqmod'
-sudo make install
-cd ..
+export prefix
 
-pwd
+mk3rdparty() {
+	mkdir $1 && cd $1
+	cmake -DCMAKE_INSTALL_PREFIX=$prefix ../../3rdparty/$1
+	make
+	read -p "press ENTER to install $1"
+	sudo make install
+	cd ..; pwd
+}
 
-mkdir indi-asi && cd indi-asi
-cmake -DCMAKE_INSTALL_PREFIX=$prefix ../../3rdparty/indi-asi
-make -j4
-read -p 'press ENTER to install indi-asi'
-sudo make install
-cd ..
-
-pwd
+mk3rdparty indi-eqmod
+mk3rdparty indi-asi
+# mk3rdparty libatik
+# mk3rdparty indi-atik
 
 sudo dnf remove {libnova,cfitsio,libusb,zlib,gsl,libjpeg,libcurl,libtheora}-devel || echo nope
+
+popd
