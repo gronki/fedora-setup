@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -e
 
-prefix=/usr/local
+prefix=/opt/astrometry
 
 sudo dnf install -y \
     {freetype,zlib,libpng,cairo,cfitsio,libjpeg-turbo,libimagequant}-devel \
@@ -9,7 +9,8 @@ sudo dnf install -y \
     python2-{numpy,devel} gcc-c++ netpbm-{progs,devel}
 
 cd $(mktemp -d)
-ASTROMETRY_VERSION=0.74
+ASTROMETRY_VERSION=0.77
+# 0.74 last working
 curl -L \
     https://github.com/dstndstn/astrometry.net/archive/${ASTROMETRY_VERSION}.tar.gz \
     -o astrometry.net.tar.gz
@@ -18,22 +19,26 @@ cd astrometry.net-${ASTROMETRY_VERSION}
 
 pwd
 
-./configure && make -j4 
+./configure && make -j2
 read -p 'press ENTER to install astrometry'
 sudo make install INSTALL_DIR=${prefix}
 
 pwd
 
-if [ $prefix != '/usr/local' ]; then
-	sudo tee /etc/profile.d/astrometry.sh <<EOF
-	export PATH=\"${prefix}/bin:\$PATH\"
-	export LIBRARY_PATH=\"${prefix}/lib:\$LIBRARY_PATH\"
-	# export LD_LIBRARY_PATH=\"${prefix}/lib:\$LD_LIBRARY_PATH\"
+libdir="$prefix/lib"
+# libdir=$(rpm --define "_prefix $prefix" -E %_libdir)
+sudo tee /etc/profile.d/astrometry.sh <<EOF
+export PATH="$prefix/bin:\$PATH"
+export LIBRARY_PATH="$libdir:\$LIBRARY_PATH"
+export LD_LIBRARY_PATH="$libdir:\$LD_LIBRARY_PATH"
+# export CPATH="$prefix/include/libindi:\$CPATH"
 EOF
 
-	echo ${prefix}/lib | sudo tee /etc/ld.so.conf.d/astrometry.conf
-	sudo ldconfig -v
-fi
+. /etc/profile.d/astrometry.sh
+echo "$libdir" | sudo tee /etc/ld.so.conf.d/astrometry.conf
+sudo ldconfig -v
+
+##
 
 read -p 'Press ENTER to download data...'
 sudo mkdir -p ${prefix}/data && cd ${prefix}/data
