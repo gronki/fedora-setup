@@ -2,13 +2,13 @@
 # coding: utf-8
 set -e
 
-prefix=/usr/local
+prefix=/opt/indi
 
 sudo dnf install -y @c-development cmake {libnova,cfitsio,libusb,zlib,gsl,libjpeg,libcurl,libtheora}{,-devel}
 
 pushd $(mktemp -d) && pwd
 
-indiversion=1.7.5
+indiversion=1.7.2
 curl -L https://github.com/indilib/indi/archive/v${indiversion}.tar.gz -o indi.tar.gz
 tar xzf indi.tar.gz && cd indi-${indiversion}
 
@@ -23,21 +23,17 @@ cd ..
 
 pwd
 
-if [ $prefix != '/usr/local' ]; then
-	
-	libdir=$(rpm --define "_prefix $prefix" -E %_libdir)
-
-	sudo tee /etc/profile.d/indi.sh <<EOF
-	export PATH="$prefix/bin:\$PATH"
-	export LIBRARY_PATH="$libdir:\$LIBRARY_PATH"
-	export LD_LIBRARY_PATH="$libdir:\$LD_LIBRARY_PATH"
-	export CPATH="$prefix/include/libindi:\$CPATH"
+libdir=$(rpm --define "_prefix $prefix" -E %_libdir)
+sudo tee /etc/profile.d/indi.sh <<EOF
+export PATH="$prefix/bin:\$PATH"
+export LIBRARY_PATH="$libdir:\$LIBRARY_PATH"
+export LD_LIBRARY_PATH="$libdir:\$LD_LIBRARY_PATH"
+export CPATH="$prefix/include/libindi:\$CPATH"
 EOF
 
-	. /etc/profile.d/indi.sh
-	echo $libdir | sudo tee /etc/ld.so.conf.d/indi.conf
-	sudo ldconfig -v
-fi
+. /etc/profile.d/indi.sh
+echo "$libdir" | sudo tee /etc/ld.so.conf.d/indi.conf
+sudo ldconfig -v
 
 export prefix
 
@@ -52,6 +48,7 @@ mk3rdparty() {
 
 mk3rdparty indi-eqmod
 mk3rdparty indi-asi
+sudo cp ../3rdparty/asi-common/99-asi.rules /etc/udev/rules.d/
 # mk3rdparty libatik
 # mk3rdparty indi-atik
 
