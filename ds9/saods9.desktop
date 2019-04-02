@@ -1,10 +1,10 @@
 [Desktop Entry]
-Version=7.5
+Version=7.6
 Type=Application
 Name=DS9
 Comment=Viewer of FITS images provided by Harvard-Smithsonian Astronomical Observatory
 TryExec=ds9
-Exec=ds9 -view buttons no -mode pan -single -blink interval 0.25 %F -lock frame image -lock scale yes -single -asinh -scale mode 99.8 -zoom to fit
+Exec=ds9 -view layout vertical -view buttons no -mode pan %F -lock frame image -lock scale yes -asinh -scale mode 99.8
 Icon=saods9
 MimeType=image/fits;
 Categories=Science;Astronomy;Education;Physics;Graphics;
