@@ -19,9 +19,11 @@ cd astrometry.net-${ASTROMETRY_VERSION}
 
 pwd
 
-./configure && make -j2
+today=$(date +%y%m%d)
+./configure && make -j2 AN_GIT_REVISION=$ASTROMETRY_VERSION AN_GIT_DATE=$today
 read -p 'press ENTER to install astrometry'
-sudo make install INSTALL_DIR=${prefix}
+sudo make install INSTALL_DIR=${prefix} \
+	AN_GIT_REVISION=$ASTROMETRY_VERSION AN_GIT_DATE=$today
 
 pwd
 
@@ -31,7 +33,7 @@ sudo tee /etc/profile.d/astrometry.sh <<EOF
 export PATH="$prefix/bin:\$PATH"
 export LIBRARY_PATH="$libdir:\$LIBRARY_PATH"
 export LD_LIBRARY_PATH="$libdir:\$LD_LIBRARY_PATH"
-# export CPATH="$prefix/include/libindi:\$CPATH"
+export CPATH="$prefix/include/astrometry:\$CPATH"
 EOF
 
 . /etc/profile.d/astrometry.sh
