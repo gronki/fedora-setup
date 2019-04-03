@@ -6,7 +6,7 @@ prefix=/opt/astrometry
 sudo dnf install -y \
     {freetype,zlib,libpng,cairo,cfitsio,libjpeg-turbo,libimagequant}-devel \
     swig redhat-rpm-config @c-development cfitsio sextractor \
-    python2-{numpy,devel} gcc-c++ netpbm-{progs,devel}
+    python2-{numpy,devel} gcc-c++ netpbm-{progs,devel} wget
 
 cd $(mktemp -d)
 ASTROMETRY_VERSION=0.77
