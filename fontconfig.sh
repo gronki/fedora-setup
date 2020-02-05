@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-set -ex
+set -e
 
 confd=/etc/fonts/conf.d
 availd=/usr/share/fontconfig/conf.avail
@@ -14,6 +14,7 @@ setXres() {
 	echo "${1}.${2}: ${3}" | xrdb -merge
 }
 
+echo select hinting in slight medium full none
 select hinting in slight medium full none
 do
 	if [ -n "$hinting" ]; then
@@ -26,6 +27,7 @@ do
 	fi
 done
 
+echo select filter in default light legacy
 select filter in default light legacy
 do
 	if [ -n "$filter" ]; then
