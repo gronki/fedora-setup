@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<channel name="xfce4-panel" version="1.0">
+  <property name="configver" type="int" value="2"/>
+  <property name="panels" type="array">
+    <value type="int" value="1"/>
+    <property name="panel-1" type="empty">
+      <property name="position" type="string" value="p=6;x=960;y=16"/>
+      <property name="length" type="uint" value="100"/>
+      <property name="position-locked" type="bool" value="true"/>
+      <property name="icon-size" type="uint" value="20"/>
+      <property name="size" type="uint" value="30"/>
+      <property name="plugin-ids" type="array">
+        <value type="int" value="1"/>
+        <value type="int" value="17"/>
+        <value type="int" value="15"/>
+        <value type="int" value="14"/>
+        <value type="int" value="18"/>
+        <value type="int" value="7"/>
+        <value type="int" value="2"/>
+        <value type="int" value="3"/>
+        <value type="int" value="4"/>
+        <value type="int" value="5"/>
+        <value type="int" value="6"/>
+        <value type="int" value="8"/>
+        <value type="int" value="9"/>
+        <value type="int" value="10"/>
+        <value type="int" value="11"/>
+        <value type="int" value="12"/>
+        <value type="int" value="13"/>
+      </property>
+      <property name="enter-opacity" type="uint" value="100"/>
+      <property name="leave-opacity" type="uint" value="100"/>
+      <property name="background-style" type="uint" value="1"/>
+      <property name="background-rgba" type="array">
+        <value type="double" value="0.036667"/>
+        <value type="double" value="0.036667"/>
+        <value type="double" value="0.036667"/>
+        <value type="double" value="0.689189"/>
+      </property>
+    </property>
+  </property>
+  <property name="plugins" type="empty">
+    <property name="plugin-1" type="string" value="applicationsmenu">
+      <property name="button-title" type="string" value="apps"/>
+      <property name="button-icon" type="string" value="fedora-logo-icon"/>
+      <property name="show-tooltips" type="bool" value="true"/>
+    </property>
+    <property name="plugin-2" type="string" value="tasklist">
+      <property name="grouping" type="uint" value="0"/>
+      <property name="show-handle" type="bool" value="false"/>
+      <property name="flat-buttons" type="bool" value="true"/>
+      <property name="window-scrolling" type="bool" value="false"/>
+      <property name="show-wireframes" type="bool" value="false"/>
+      <property name="include-all-monitors" type="bool" value="true"/>
+    </property>
+    <property name="plugin-3" type="string" value="separator">
+      <property name="expand" type="bool" value="true"/>
+      <property name="style" type="uint" value="0"/>
+    </property>
+    <property name="plugin-4" type="string" value="pager"/>
+    <property name="plugin-5" type="string" value="separator">
+      <property name="style" type="uint" value="0"/>
+    </property>
+    <property name="plugin-6" type="string" value="systray">
+      <property name="show-frame" type="bool" value="false"/>
+      <property name="square-icons" type="bool" value="true"/>
+      <property name="names-ordered" type="array">
+        <value type="string" value="zoom"/>
+        <value type="string" value="transmission"/>
+        <value type="string" value="przypomnienia"/>
+        <value type="string" value="owncloud"/>
+        <value type="string" value="bluetooth"/>
+        <value type="string" value="remmina"/>
+        <value type="string" value="discord"/>
+        <value type="string" value="dnfdragora-updater"/>
+        <value type="string" value="evolution-alarm-notify"/>
+        <value type="string" value="xfce4-power-manager"/>
+        <value type="string" value="aplet networkmanager"/>
+        <value type="string" value="blueberry-tray.py"/>
+      </property>
+    </property>
+    <property name="plugin-8" type="string" value="pulseaudio">
+      <property name="enable-keyboard-shortcuts" type="bool" value="true"/>
+      <property name="show-notifications" type="bool" value="true"/>
+      <property name="mpris-players" type="string" value="chromium.instance116951;chromium.instance13311;chromium.instance13614;chromium.instance13896;chromium.instance14171;chromium.instance14449;chromium.instance14754;chromium.instance150196;chromium.instance16259;chromium.instance1907;chromium.instance19129;chromium.instance1917;chromium.instance2190;chromium.instance2325;chromium.instance2399;chromium.instance23993;chromium.instance2456;chromium.instance2593;chromium.instance2621;chromium.instance2646;chromium.instance2656;chromium.instance28202;chromium.instance290602;chromium.instance299123;chromium.instance302347;chromium.instance333805;chromium.instance35444;chromium.instance36878;chromium.instance38592;chromium.instance38939;chromium.instance40191;chromium.instance4199;chromium.instance55474;chromium.instance5602;chromium.instance6041;chromium.instance70742;chromium.instance7252;chromium.instance7281;chromium.instance7676;chromium.instance8105;spotify"/>
+    </property>
+    <property name="plugin-9" type="string" value="power-manager-plugin"/>
+    <property name="plugin-10" type="string" value="notification-plugin"/>
+    <property name="plugin-11" type="string" value="separator">
+      <property name="style" type="uint" value="0"/>
+    </property>
+    <property name="plugin-12" type="string" value="clock">
+      <property name="digital-format" type="string" value="%a %d %b, %H:%M:%S"/>
+      <property name="mode" type="uint" value="2"/>
+      <property name="timezone" type="string" value="CET"/>
+    </property>
+    <property name="plugin-13" type="string" value="separator">
+      <property name="style" type="uint" value="0"/>
+    </property>
+    <property name="plugin-7" type="string" value="separator">
+      <property name="style" type="uint" value="0"/>
+    </property>
+    <property name="plugin-15" type="string" value="launcher">
+      <property name="items" type="array">
+        <value type="string" value="15774512751.desktop"/>
+      </property>
+    </property>
+    <property name="plugin-17" type="string" value="separator">
+      <property name="style" type="uint" value="0"/>
+    </property>
+    <property name="plugin-18" type="string" value="launcher">
+      <property name="items" type="array">
+        <value type="string" value="15798121382.desktop"/>
+      </property>
+    </property>
+    <property name="plugin-14" type="string" value="launcher">
+      <property name="items" type="array">
+        <value type="string" value="15808507311.desktop"/>
+      </property>
+    </property>
+  </property>
+</channel>
