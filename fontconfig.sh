@@ -14,7 +14,7 @@ setXres() {
 	echo "${1}.${2}: ${3}" | xrdb -merge
 }
 
-echo select hinting in slight medium full none
+echo select hinting
 select hinting in slight medium full none
 do
 	if [ -n "$hinting" ]; then
@@ -27,7 +27,7 @@ do
 	fi
 done
 
-echo select filter in default light legacy
+echo select filter
 select filter in default light legacy
 do
 	if [ -n "$filter" ]; then
