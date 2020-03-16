@@ -59,11 +59,11 @@ setSubpixel() {
 	sudo rm -fv "${confd}/10-sub-pixel-"* 
 	if [ "$rgb" == none ]; then
 		sudo ln -sfv "${availd}/10-no-sub-pixel.conf" "${confd}/10-no-sub-pixel.conf"
-		gsettings set org.gnome.settings-daemon.plugins.xsettings antialiasing "grayscale"
+		gsettings set org.gnome.settings-daemon.plugins.xsettings antialiasing "grayscale" || echo nope
 	else
 		sudo rm -fv "${confd}/10-no-sub-pixel.conf"
-		gsettings set org.gnome.settings-daemon.plugins.xsettings antialiasing "rgba"
-		gsettings set org.gnome.settings-daemon.plugins.xsettings rgba-order "$rgb"
+		gsettings set org.gnome.settings-daemon.plugins.xsettings antialiasing "rgba" || echo nope
+		gsettings set org.gnome.settings-daemon.plugins.xsettings rgba-order "$rgb" || echo nope
 	fi
 	xfconf-query -c xsettings -p /Xft/RGBA -s "$rgb" || echo xfconf fail
 	echo
