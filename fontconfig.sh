@@ -22,14 +22,14 @@ setHinting() {
 	
 	if [ $hinting == none ]; then
 		setXres Xft hinting "false"
-		sudo ln -s "${availd}/10-unhinted.conf" "${confd}/10-unhinted.conf"
+		sudo ln -sv "${availd}/10-unhinted.conf" "${confd}/10-unhinted.conf"
 	else
 		setXres Xft hinting "true"
 		sudo rm -fv "${confd}"/10-unhinted.conf
 	fi
 
 	sudo rm -fv "${confd}"/10-hinting-*.conf
-	sudo ln -s "${availd}/10-hinting-${hinting}.conf" "${confd}/10-hinting-${hinting}.conf"
+	sudo ln -sv "${availd}/10-hinting-${hinting}.conf" "${confd}/10-hinting-${hinting}.conf"
 	
 	setXres Xft hintstyle "hint${hinting}"
 	
@@ -45,7 +45,7 @@ setLcdFilter() {
 	filter="$1"
 	
 	sudo rm -fv "${confd}"/11-lcdfilter-*.conf
-	sudo ln -s "${availd}/11-lcdfilter-${filter}.conf" "${confd}/11-lcdfilter-${filter}.conf"
+	sudo ln -sv "${availd}/11-lcdfilter-${filter}.conf" "${confd}/11-lcdfilter-${filter}.conf"
 	setXres Xft lcdfilter "lcd${filter}"
 	
 	echo
@@ -62,6 +62,7 @@ setSubpixel() {
 		gsettings set org.gnome.settings-daemon.plugins.xsettings antialiasing "grayscale" || echo nope
 	else
 		sudo rm -fv "${confd}/10-no-sub-pixel.conf"
+		sudo ln -sv "${availd}/10-sub-pixel-$rgb.conf" "${confd}/10-sub-pixel-$rgb.conf"
 		gsettings set org.gnome.settings-daemon.plugins.xsettings antialiasing "rgba" || echo nope
 		gsettings set org.gnome.settings-daemon.plugins.xsettings rgba-order "$rgb" || echo nope
 	fi
@@ -75,8 +76,8 @@ setSubpixel() {
 
 sudo pwd; echo
 
-setXres Xft antialias "true"
-setXres Xft autohint "false"
+setXres Xft antialias 1
+setXres Xft autohint 0
 
 echo select hinting
 select hinting in slight medium full none
