@@ -8,7 +8,7 @@ availd=/usr/share/fontconfig/conf.avail
 Xres=/etc/X11/Xresources
 
 setXres() {
-	if grep "${1}[.*]${2}" "${Xres}"; then
+	if grep -q "${1}[.*]${2}" "${Xres}"; then
 		sudo sed -i "s/${1}[.*]${2}.*$/${1}.${2}: ${3}/" "${Xres}"
 	else
 		echo "${1}.${2}: ${3}" | sudo tee -a "${Xres}"
@@ -36,9 +36,7 @@ setHinting() {
 	xfconf-query -c xsettings -p /Xft/HintStyle -s "hint${hinting}" || echo xfconf fail
 	gsettings set org.gnome.settings-daemon.plugins.xsettings hinting ${hinting} || echo gsettings fail
 	
-	echo
-	echo -e "hinting set to \033[1m$hinting\033[0m"
-	echo
+	echo -e "\nhinting set to \033[1m$hinting\033[0m\n"
 }
 
 setLcdFilter() {
@@ -48,9 +46,7 @@ setLcdFilter() {
 	sudo ln -sv "${availd}/11-lcdfilter-${filter}.conf" "${confd}/11-lcdfilter-${filter}.conf"
 	setXres Xft lcdfilter "lcd${filter}"
 	
-	echo
-	echo -e "lcdfilter set to \033[1m$filter\033[0m"
-	echo
+	echo -e "\nlcdfilter set to \033[1m$filter\033[0m\n"
 }
 
 setSubpixel() {
@@ -67,9 +63,19 @@ setSubpixel() {
 		gsettings set org.gnome.settings-daemon.plugins.xsettings rgba-order "$rgb" || echo nope
 	fi
 	xfconf-query -c xsettings -p /Xft/RGBA -s "$rgb" || echo xfconf fail
-	echo
-	echo -e "subpixel rendering set to \033[1m$rgb\033[0m"
-	echo
+	echo -e "\nsubpixel rendering set to \033[1m$rgb\033[0m\n"
+}
+
+setAutohint() {
+	if [ -z $1 -o $1 == 0 ]; then
+		setXres Xft autohint 0
+		sudo rm -fv "$confd/10-autohint.conf"
+		echo -e "\nautohint off\n"
+	else
+		setXres Xft autohint 1
+		sudo ln -sfv "$availd/10-autohint.conf" "$confd/10-autohint.conf"
+		echo -e "\n\033[1mautohint enabled\033[0m\n"
+	fi
 }
 
 #-----------------------------------------------------------------------------#
@@ -77,13 +83,22 @@ setSubpixel() {
 sudo pwd; echo
 
 setXres Xft antialias 1
-setXres Xft autohint 0
 
 echo select hinting
 select hinting in slight medium full none
 do
 	if [ -n "$hinting" ]; then
 		setHinting "$hinting"
+		break
+	fi
+done
+
+echo autohint?
+select ah in no yes
+do
+	if [ -n "$ah" ]; then
+		[ "$ah" == yes ] && setAutohint 1
+		[ "$ah" == no  ] && setAutohint 0
 		break
 	fi
 done
