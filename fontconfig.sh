@@ -70,7 +70,7 @@ setAutohint() {
 	if [ -z $1 -o $1 == 0 ]; then
 		setXres Xft autohint 0
 		sudo rm -fv "$confd/10-autohint.conf"
-		echo -e "\nautohint off\n"
+		echo -e "\nautohint \033[1moff\033[0m\n"
 	else
 		setXres Xft autohint 1
 		sudo ln -sfv "$availd/10-autohint.conf" "$confd/10-autohint.conf"
@@ -85,7 +85,7 @@ sudo pwd; echo
 setXres Xft antialias 1
 
 echo select hinting
-select hinting in slight medium full none
+select hinting in full slight none
 do
 	if [ -n "$hinting" ]; then
 		setHinting "$hinting"
