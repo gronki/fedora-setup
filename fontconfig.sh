@@ -85,7 +85,7 @@ sudo pwd; echo
 setXres Xft antialias 1
 
 echo select hinting
-select hinting in slight full none
+select hinting in full slight none
 do
 	if [ -n "$hinting" ]; then
 		setHinting "$hinting"
