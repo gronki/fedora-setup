@@ -8,8 +8,7 @@ OPENPHD_VER=2.6.5
 prefix=/opt/phd2
 
 cd $(mktemp -d)
-curl -L https://github.com/OpenPHDGuiding/phd2/archive/v${OPENPHD_VER}.tar.gz -o phd2.tar.gz
-tar xzf phd2.tar.gz
+curl -L https://github.com/OpenPHDGuiding/phd2/archive/v${OPENPHD_VER}.tar.gz | tar xzf -
 
 cd phd2-${OPENPHD_VER}
 mkdir -p tmp && cd tmp

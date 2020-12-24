@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
-
-set -e
+set -ex
 
 version=8.0.1
 
@@ -12,7 +11,7 @@ datadir=$prefix/share
 docdir=$datadir/doc
 
 sudo dnf install -y {libX11,zlib,libxml2,libxslt,libXft,fontconfig}-devel \
-	@c-development gcc-{c++,gfortran} libX11 zlib libxml2 libxslt fontconfig libXft tcl
+        libX11 zlib libxml2 libxslt fontconfig libXft tcl
 sudo dnf install -y --allowerasing compat-openssl10-devel
 
 builddir=$(mktemp -d)

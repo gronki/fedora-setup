@@ -1,30 +1,31 @@
 #!/usr/bin/env bash
-# coding: utf-8
-set -e
+set -ex
 
-prefix=/opt/indi
+export prefix=/opt/indi
 
-sudo dnf install -y @c-development cmake {libnova,cfitsio,libusb,zlib,gsl,libjpeg,libcurl,libtheora}{,-devel}
+sudo dnf install -y {libnova,cfitsio,libusb,zlib,gsl,libjpeg,libcurl,libtheora,fftw3}{,-devel}
 
-pushd $(mktemp -d) && pwd
+cd $(mktemp -d) && pwd
 
-indiversion=1.7.6
-# 1.7.5 and later not working with ASI120MM-S
-curl -L https://github.com/indilib/indi/archive/v${indiversion}.tar.gz -o indi.tar.gz
-tar xzf indi.tar.gz && cd indi-${indiversion}
+indiversion=1.8.4
+curl -L https://github.com/indilib/indi/archive/v${indiversion}.tar.gz | tar xzf -	
+curl -L https://github.com/indilib/indi-3rdparty/archive/v${indiversion}.tar.gz | tar xzf -
 
-mkdir build && cd build
+# build INDI base
 
-mkdir libindi && cd libindi
-cmake -DCMAKE_INSTALL_PREFIX=$prefix ../../libindi
-make
-read -p 'press ENTER to install libindi'
-sudo make install
-cd ..
+mkdir -p indi-${indiversion}/build
+pushd    indi-${indiversion}/build
 
-pwd
+cmake -DCMAKE_INSTALL_PREFIX=$prefix .. && make \
+	&& read -p 'press ENTER to install libindi' \
+	&& sudo make install
+
+popd
+
+# ld config
 
 libdir=$(rpm --define "_prefix $prefix" -E %_libdir)
+
 sudo tee /etc/profile.d/indi.sh <<EOF
 export PATH="$prefix/bin:\$PATH"
 export LIBRARY_PATH="$libdir:\$LIBRARY_PATH"
@@ -32,27 +33,37 @@ export LD_LIBRARY_PATH="$libdir:\$LD_LIBRARY_PATH"
 export CPATH="$prefix/include/libindi:\$CPATH"
 EOF
 
-. /etc/profile.d/indi.sh
+source /etc/profile.d/indi.sh
 echo "$libdir" | sudo tee /etc/ld.so.conf.d/indi.conf
 sudo ldconfig -v
 
-export prefix
+# build 3rd party drivers
+
+mkdir -p indi-3rdparty-${indiversion}/build
+pushd    indi-3rdparty-${indiversion}/build
 
 mk3rdparty() {
-	mkdir $1 && cd $1
-	cmake -DCMAKE_INSTALL_PREFIX=$prefix ../../3rdparty/$1
-	make
-	read -p "press ENTER to install $1"
-	sudo make install
-	cd ..; pwd
+	driver="$1"
+	test -d "../$driver"
+	mkdir -p $driver; pushd $driver
+	cmake -DCMAKE_INSTALL_PREFIX=$prefix "../../$driver" && make \
+		&& read -p "press ENTER to install $driver" \
+		&& sudo make install
+	popd
 }
 
 mk3rdparty indi-eqmod
+
+mk3rdparty libasi
+sudo cp ../libasi/99-asi.rules /etc/udev/rules.d/
 mk3rdparty indi-asi
-sudo cp ../3rdparty/asi-common/99-asi.rules /etc/udev/rules.d/
+
 # mk3rdparty libatik
 # mk3rdparty indi-atik
 
-sudo dnf remove {libnova,cfitsio,libusb,zlib,gsl,libjpeg,libcurl,libtheora}-devel || echo nope
-
 popd
+
+# cleanup
+
+sudo dnf remove {libnova,cfitsio,libusb,zlib,gsl,libjpeg,libcurl,libtheora,fftw3}-devel || echo nope
+

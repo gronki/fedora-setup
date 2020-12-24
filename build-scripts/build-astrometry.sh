@@ -1,15 +1,15 @@
 #!/usr/bin/env bash
-set -e
+set -ex
 
 prefix=/opt/astrometry
 
 sudo dnf install -y \
     {freetype,zlib,libpng,cairo,cfitsio,libjpeg-turbo,libimagequant}-devel \
-    swig redhat-rpm-config @c-development cfitsio sextractor \
-    python2-{numpy,devel} gcc-c++ netpbm-{progs,devel} wget
+    swig redhat-rpm-config cfitsio sextractor \
+    python2-{numpy,devel} netpbm-{progs,devel} wget
 
 cd $(mktemp -d)
-ASTROMETRY_VERSION=0.77
+ASTROMETRY_VERSION=0.78
 # 0.74 last working
 curl -L \
     https://github.com/dstndstn/astrometry.net/archive/${ASTROMETRY_VERSION}.tar.gz \
