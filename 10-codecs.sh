@@ -1,12 +1,10 @@
-#!/bin/bash
+#!/usr/bin/env bash
 set -ex
 
-sudo dnf install mpv \
-libva{,-utils} vdpauinfo ffmpeg-libs compat-ffmpeg28 \
-gstreamer1-vaapi gstreamer1-plugins{-base,-good{,-extras},-bad{-free{,-extras},-freeworld,-nonfree}} \
-gstreamer1-plugin-mpg123 mpg123-libs \
-gstreamer-{ffmpeg,plugins-good} \
-libde265
+sudo dnf install \
+	mpv ffmpeg{,-libs} libva gstreamer1-{libav,vaapi} \
+	gstreamer1-plugins-{good{,-extras},bad-{free,freeworld},ugly} \
+	gstreamer1-plugin-mpg123 mpg123-libs 
 
 echo 'hwdec=yes' | sudo tee -a /etc/mpv/mpv.conf
 

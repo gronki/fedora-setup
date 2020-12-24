@@ -1,22 +1,22 @@
-#!/bin/bash
+#!/usr/bin/env bash
 set -e
 
-OPTFLAGS="-O3 -pipe -g1 -Wall"
+OPTFLAGS="-O3 -flto=auto -funsafe-math-optimizations -pipe"
 ARCHFLAGS="-march=native"
 
+# RPi 3B
 if cat /proc/cpuinfo | grep BCM2835; then
-	OPTFLAGS="$OPTFLAGS -funsafe-math-optimizations"
 	ARCHFLAGS="-mcpu=cortex-a53 -mfpu=neon-fp-armv8 -mfloat-abi=hard"
 fi
 
 sudo tee /etc/profile.d/cflags.sh <<EOF
 export ARCHFLAGS="$ARCHFLAGS"
-OPTFLAGS="$OPTFLAGS"
+export OPTFLAGS="$OPTFLAGS \$ARCHFLAGS"
 
-export   CFLAGS="\$OPTFLAGS \$ARCHFLAGS"
-export CXXFLAGS="\$OPTFLAGS \$ARCHFLAGS"
-export   FFLAGS="\$OPTFLAGS \$ARCHFLAGS"
-export  FCFLAGS="\$OPTFLAGS \$ARCHFLAGS"
+export   CFLAGS="\$OPTFLAGS"
+export CXXFLAGS="\$OPTFLAGS"
+export   FFLAGS="\$OPTFLAGS"
+export  FCFLAGS="\$OPTFLAGS"
 EOF
 
 sudo vi /etc/profile.d/cflags.sh

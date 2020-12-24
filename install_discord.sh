@@ -17,6 +17,7 @@ cd /opt/discord
 sudo chmod +x Discord
 sudo ln -sf $PWD/Discord /usr/local/bin/Discord
 cat discord.desktop | sed 's/\/usr\/share/\/opt/' | sudo tee /usr/local/share/applications/discord.desktop
+sudo mkdir -p /usr/local/share/icons
 sudo ln -sf $PWD/discord.png /usr/local/share/icons/discord.png
 
 bash postinst.sh

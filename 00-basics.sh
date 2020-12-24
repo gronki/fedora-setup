@@ -1,1 +1,2 @@
-sudo dnf install -y vim bash-completion net-tools htop parallel tree usbutils
+#!/usr/bin/env bash
+sudo dnf install vim neovim bash-completion net-tools htop parallel tree colordiff

@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 set -ex
 
 # astrophotography reduction
@@ -22,9 +22,6 @@ sudo dnf install -y stellarium skychart{,-data-{stars,dso}} \
 
 # FITS and other astro files
 sudo dnf install -y pyfits cfitsio{,-devel} ATpy
-
-# python libraries
-sudo dnf install -y pyephem python2-{astropy,wcsaxes,APLpy,photutils}
 
 # Google Earth
 sudo dnf install -y marble-astro
