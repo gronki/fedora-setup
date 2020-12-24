@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-set -e
 
 #-----------------------------------------------------------------------------#
 
@@ -33,8 +32,8 @@ setHinting() {
 	
 	setXres Xft hintstyle "hint${hinting}"
 	
-	xfconf-query -c xsettings -p /Xft/HintStyle -s "hint${hinting}" || echo xfconf fail
-	gsettings set org.gnome.settings-daemon.plugins.xsettings hinting ${hinting} || echo gsettings fail
+	xfconf-query -c xsettings -p /Xft/HintStyle -s "hint${hinting}"
+	gsettings set org.gnome.settings-daemon.plugins.xsettings hinting ${hinting}
 	
 	echo -e "\nhinting set to \033[1m$hinting\033[0m\n"
 }
@@ -55,14 +54,14 @@ setSubpixel() {
 	sudo rm -fv "${confd}/10-sub-pixel-"* 
 	if [ "$rgb" == none ]; then
 		sudo ln -sfv "${availd}/10-no-sub-pixel.conf" "${confd}/10-no-sub-pixel.conf"
-		gsettings set org.gnome.settings-daemon.plugins.xsettings antialiasing "grayscale" || echo nope
+		gsettings set org.gnome.settings-daemon.plugins.xsettings antialiasing "grayscale"
 	else
 		sudo rm -fv "${confd}/10-no-sub-pixel.conf"
 		sudo ln -sv "${availd}/10-sub-pixel-$rgb.conf" "${confd}/10-sub-pixel-$rgb.conf"
-		gsettings set org.gnome.settings-daemon.plugins.xsettings antialiasing "rgba" || echo nope
-		gsettings set org.gnome.settings-daemon.plugins.xsettings rgba-order "$rgb" || echo nope
+		gsettings set org.gnome.settings-daemon.plugins.xsettings antialiasing "rgba"
+		gsettings set org.gnome.settings-daemon.plugins.xsettings rgba-order "$rgb"
 	fi
-	xfconf-query -c xsettings -p /Xft/RGBA -s "$rgb" || echo xfconf fail
+	xfconf-query -c xsettings -p /Xft/RGBA -s "$rgb"
 	echo -e "\nsubpixel rendering set to \033[1m$rgb\033[0m\n"
 }
 
