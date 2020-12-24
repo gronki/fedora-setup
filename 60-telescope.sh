@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -e
 
-sudo dnf install -y bzip2-libs libnova astrometry kstars
+sudo dnf install -y curl tar libnova bzip2-libs
 
 # TheImagingSource
 
