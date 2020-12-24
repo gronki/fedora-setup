@@ -19,4 +19,4 @@ export   FFLAGS="\$OPTFLAGS \$ARCHFLAGS"
 export  FCFLAGS="\$OPTFLAGS \$ARCHFLAGS"
 EOF
 
-sudo vim /etc/profile.d/cflags.sh
+sudo vi /etc/profile.d/cflags.sh
