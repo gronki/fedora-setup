@@ -8,7 +8,8 @@ sudo dnf install -y @c-development cmake {libnova,cfitsio,libusb,zlib,gsl,libjpe
 
 pushd $(mktemp -d) && pwd
 
-indiversion=1.7.2
+indiversion=1.7.6
+# 1.7.5 and later not working with ASI120MM-S
 curl -L https://github.com/indilib/indi/archive/v${indiversion}.tar.gz -o indi.tar.gz
 tar xzf indi.tar.gz && cd indi-${indiversion}
 
