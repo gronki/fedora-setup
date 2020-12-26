@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -e
 
-OPTFLAGS="-O3 -flto=auto -funsafe-math-optimizations -pipe"
+OPTFLAGS="-O3 -funsafe-math-optimizations"
 ARCHFLAGS="-march=native"
 
 # RPi 3B
