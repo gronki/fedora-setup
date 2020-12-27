@@ -2,6 +2,7 @@
 set +e
 set -x
 
+bash 00-basics.sh
 bash 01-cflags.sh
 
 sudo dnf install -y \
