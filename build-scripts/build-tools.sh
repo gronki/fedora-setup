@@ -1,0 +1,1 @@
+sudo dnf install gcc{,-c++,-gfortran} make autoconf cmake git
