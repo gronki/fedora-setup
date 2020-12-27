@@ -18,9 +18,20 @@ builddir=$(mktemp -d)
 cp ../ds9/saods9.{png,desktop} $builddir
 cd $builddir
 
-curl -L http://ds9.si.edu/download/source/ds9.${version}.tar.gz | tar xzf -
+#curl -L http://ds9.si.edu/download/source/ds9.${version}.tar.gz | tar xzf -
+tar xzf $HOME/ds9.${version}.tar.gz -C $builddir
 
 cd SAOImageDS9 
+
+# unset CFLAGS FFLAGS CXXFLAGS OPTFLAGS
+
+export OPTFLAGS="-O2 $ARCHFLAGS"
+export CFLAGS="$OPTFLAGS"
+export CXXFLAGS="$OPTFLAGS"
+export FFLAGS="$OPTFLAGS"
+
+# fix error with va_list
+sed -i -E 's/va_list[A-Za-z\ ]*/.../' tcl8.6/generic/tclDecls.h
 
 unix/configure --prefix $prefix \
         --exec-prefix   $prefix \
