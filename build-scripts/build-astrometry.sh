@@ -4,9 +4,10 @@ set -ex
 prefix=/opt/astrometry
 
 sudo dnf install -y \
-    {freetype,zlib,libpng,cairo,cfitsio,libjpeg-turbo,libimagequant}-devel \
-    swig redhat-rpm-config cfitsio sextractor \
-    python2-{numpy,devel} netpbm-{progs,devel} wget
+	{freetype,zlib,libpng,cairo,cfitsio,libjpeg-turbo}{,-devel} \
+	{libimagequant,netpbm}{,-devel} \
+	swig redhat-rpm-config sextractor \
+	python3-{numpy,fitsio,devel} netpbm-progs wget
 
 cd $(mktemp -d)
 ASTROMETRY_VERSION=0.78
@@ -48,4 +49,7 @@ sudo mkdir -p ${prefix}/data && cd ${prefix}/data
 # sudo wget --continue http://broiler.astrometry.net/~dstn/4200/index-{4219,4218,4217,4216,4215,4214,4213,4212,4211,4210,4209,4208,{4207,4206,4205}-{00,01,02,03,04,05,06,07,08,07,10,11}}.fits
 sudo wget --continue http://broiler.astrometry.net/~dstn/4200/index-{4210,4209,4208,4207-{00,01,02,03,04,05,06,07,08,09,10,11}}.fits
 
-sudo dnf remove swig {freetype,zlib,netpbm,libpng,cairo,libjpeg-turbo,cfitsio,libimagequant}-devel  || echo nope
+sudo dnf remove \
+	{freetype,zlib,libpng,cairo,cfitsio,libjpeg-turbo}-devel \
+	{libimagequant,netpbm}-devel || echo nevermind
+

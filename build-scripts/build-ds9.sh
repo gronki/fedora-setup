@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -ex
 
-version=8.2
+version=8.1
 
 prefix=/usr/local
 bindir=$prefix/bin
@@ -18,12 +18,10 @@ builddir=$(mktemp -d)
 cp ../ds9/saods9.{png,desktop} $builddir
 cd $builddir
 
-#curl -L http://ds9.si.edu/download/source/ds9.${version}.tar.gz | tar xzf -
-tar xzf $HOME/ds9.${version}.tar.gz -C $builddir
+curl -L http://ds9.si.edu/archive/source/ds9.${version}.tar.gz | tar xzf -
+#tar xzf $HOME/ds9.${version}.tar.gz -C $builddir
 
 cd SAOImageDS9 
-
-# unset CFLAGS FFLAGS CXXFLAGS OPTFLAGS
 
 export OPTFLAGS="-O2 $ARCHFLAGS"
 export CFLAGS="$OPTFLAGS"
@@ -31,7 +29,7 @@ export CXXFLAGS="$OPTFLAGS"
 export FFLAGS="$OPTFLAGS"
 
 # fix error with va_list
-sed -i -E 's/va_list[A-Za-z\ ]*/.../' tcl8.6/generic/tclDecls.h
+#sed -i -E 's/va_list[A-Za-z\ ]*/.../' tcl8.6/generic/tclDecls.h
 
 unix/configure --prefix $prefix \
         --exec-prefix   $prefix \
@@ -46,12 +44,13 @@ sudo install -d ${bindir}
 sudo install -d ${datadir}/{icons,applications}
 sudo install -d ${docdir}/saods9
 
-sudo install bin/ds9 ${bindir}
+sudo install bin/ds9 ${bindir}/ds9-${version}
+sudo ln -sf ${bindir}/ds9-${version} ${bindir}/ds9
 sudo install -m 644 ds9/doc/* ${docdir}/saods9/
 
 cd ..
 sudo install -m 644 saods9.png ${datadir}/icons/
 sudo install -m 644 saods9.desktop ${datadir}/applications/
 
-sudo dnf remove {libX11,zlib,openssl,libxml2,libxslt,libXft,fontconfig}-devel
-sudo dnf remove compat-openssl10-devel
+sudo dnf remove {libX11,zlib,openssl,libxml2,libxslt,libXft,fontconfig}-devel \
+       compat-openssl10-devel || echo nevermind
