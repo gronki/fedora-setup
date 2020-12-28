@@ -1,8 +1,9 @@
 #!/usr/bin/env bash
 set -e
 
-OPTFLAGS="-O3 -funsafe-math-optimizations"
+OPTFLAGS="-O2"
 ARCHFLAGS="-march=native"
+OPTFLAGS_RPM=$(rpm -E %optflags)
 
 # RPi 3B
 if cat /proc/cpuinfo | grep BCM2835; then
@@ -12,6 +13,9 @@ fi
 sudo tee /etc/profile.d/cflags.sh <<EOF
 export ARCHFLAGS="$ARCHFLAGS"
 export OPTFLAGS="$OPTFLAGS \$ARCHFLAGS"
+
+# these are the flags from RPM build
+# export OPTFLAGS="$OPTFLAGS_RPM"
 
 export   CFLAGS="\$OPTFLAGS"
 export CXXFLAGS="\$OPTFLAGS"
