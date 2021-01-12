@@ -8,7 +8,7 @@ bash 01-cflags.sh
 sudo dnf install -y \
 	openbox obconf rofi tint2 tigervnc-server \
 	rxvt-unicode pcmanfm xdg-utils usbutils \
-	neovim htop ImageMagick
+	neovim htop ImageMagick leafpad
 sudo dnf install -y kstars phd2 fpack
 
 bash build-tools.sh
