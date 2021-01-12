@@ -4,11 +4,8 @@ set -x
 
 bash 00-basics.sh
 bash 01-cflags.sh
+bash 20-vnc-desktop.sh
 
-sudo dnf install -y \
-	openbox obconf rofi tint2 tigervnc-server \
-	rxvt-unicode pcmanfm xdg-utils usbutils \
-	neovim htop ImageMagick leafpad
 sudo dnf install -y kstars phd2 fpack
 
 bash build-tools.sh
